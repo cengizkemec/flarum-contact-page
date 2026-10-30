@@ -20,6 +20,7 @@ export interface TurnstileAttrs extends ComponentAttrs {
   siteKey: string;
   theme: TurnstileTheme;
   appearance: TurnstileAppearance;
+  onReady?: (widget: Turnstile) => void;
   onToken: (token: string) => void;
   onError: () => void;
   onExpire: () => void;
@@ -157,8 +158,22 @@ export default class Turnstile extends Component<TurnstileAttrs> {
         'expired-callback': () => this.attrs.onExpire(),
         'timeout-callback': () => this.attrs.onExpire(),
       });
+
+      this.attrs.onReady?.(this);
     } catch (e) {
       this.attrs.onError();
+    }
+  }
+
+  reset(): void {
+    if (!this.widgetId || !window.turnstile) {
+      return;
+    }
+
+    try {
+      window.turnstile.reset(this.widgetId);
+    } catch {
+      // The widget may have been removed while the request was in flight.
     }
   }
 }

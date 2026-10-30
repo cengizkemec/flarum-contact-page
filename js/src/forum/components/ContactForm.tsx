@@ -31,7 +31,7 @@ export default class ContactForm extends Component<ContactFormAttrs> {
   private serverError: string | null = null;
   private startedAt = 0;
   private turnstileToken = '';
-  private turnstileKey = 0;
+  private turnstileWidget: Turnstile | null = null;
   private turnstileError: string | null = null;
 
   oninit(vnode: Mithril.Vnode<ContactFormAttrs, this>): void {
@@ -92,12 +92,14 @@ export default class ContactForm extends Component<ContactFormAttrs> {
         {config.turnstile.enabled && (
           <div className="Form-group ContactPage-turnstileGroup">
             <span className="ContactPage-label">{this.trans('turnstile_label')}</span>
-            {this.turnstileKey >= 0 && config.turnstile.siteKey && (
+            {config.turnstile.siteKey && (
               <Turnstile
-                key={this.turnstileKey}
                 siteKey={config.turnstile.siteKey}
                 theme={config.turnstile.theme}
                 appearance={config.turnstile.appearance}
+                onReady={(widget: Turnstile) => {
+                  this.turnstileWidget = widget;
+                }}
                 onToken={(token: string) => {
                   this.turnstileToken = token;
                   this.turnstileError = null;
@@ -504,7 +506,7 @@ export default class ContactForm extends Component<ContactFormAttrs> {
   private resetTurnstile(): void {
     this.turnstileToken = '';
     this.turnstileError = null;
-    this.turnstileKey += 1;
+    this.turnstileWidget?.reset();
   }
 
   private focusFirstError(): void {

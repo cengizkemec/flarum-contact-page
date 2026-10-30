@@ -7,6 +7,13 @@ and the project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-10-30
+
+### Fixed
+
+- Fixed the contact form failing to render when Turnstile was enabled, which
+  prevented the security widget (and the whole form) from appearing.
+
 ## [1.0.1] - 2026-10-30
 
 ### Fixed
