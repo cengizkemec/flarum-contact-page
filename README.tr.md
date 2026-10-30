@@ -58,6 +58,14 @@ Actions matrisi PHP 8.3 ve 8.4 sürümlerini kapsar.
 composer require cengizkemec/flarum-contact-page
 ```
 
+Paket bu GitHub deposundan dağıtılır. Packagist listesi henüz eşitlenmediyse,
+etiketli sürümü VCS deposu üzerinden kurun:
+
+```bash
+composer config repositories.flarum-contact-page vcs https://github.com/cengizkemec/flarum-contact-page
+composer require cengizkemec/flarum-contact-page:^1.0
+```
+
 Ardından:
 
 1. **Yönetim → Uzantılar** bölümünü açın.

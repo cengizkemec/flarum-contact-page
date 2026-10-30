@@ -56,6 +56,15 @@ PHP **8.4.27** with SQLite. Flarum's own package constraint requires PHP
 composer require cengizkemec/flarum-contact-page
 ```
 
+The package is distributed from this GitHub repository. If the Packagist
+listing has not been synced yet, install the tagged release through a VCS
+repository instead:
+
+```bash
+composer config repositories.flarum-contact-page vcs https://github.com/cengizkemec/flarum-contact-page
+composer require cengizkemec/flarum-contact-page:^1.0
+```
+
 Then:
 
 1. Open **Administration → Extensions**.
