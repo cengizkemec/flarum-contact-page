@@ -183,7 +183,7 @@ export default class ContactForm extends Component<ContactFormAttrs> {
     const error = this.errors.message;
     const label = fieldLabel(config, 'message');
     const required = config.fields.message.required;
-    const length = this.message().length;
+    const length = this.charLength(this.message());
 
     return (
       <div className={`Form-group ContactPage-field ${error ? 'ContactPage-field--invalid' : ''}`}>
@@ -334,6 +334,7 @@ export default class ContactForm extends Component<ContactFormAttrs> {
     }
 
     this.serverError = null;
+    this.errors = {};
 
     const errors = this.validateClient();
     if (Object.keys(errors).length > 0) {
@@ -392,9 +393,18 @@ export default class ContactForm extends Component<ContactFormAttrs> {
 
   private handleError(error: RequestError): void {
     this.loading = false;
-    this.resetTurnstile();
 
     const errors = error.response?.errors;
+    const codes = Array.isArray(errors) ? errors.map((entry) => String(entry.code ?? '')) : [];
+    const onlyValidationError = error.status === 422 && codes.length > 0 && codes.every((code) => code === 'validation_error');
+
+    // A validation error happens before Turnstile is consumed, so keep a valid
+    // token for the corrected submission. Every other failure may have consumed
+    // or invalidated it, so ask the visitor to verify again.
+    if (!onlyValidationError) {
+      this.resetTurnstile();
+    }
+
     let general: string | null = null;
 
     if (Array.isArray(errors) && errors.length > 0) {
@@ -432,7 +442,7 @@ export default class ContactForm extends Component<ContactFormAttrs> {
 
     if (config.fields.name.enabled) {
       checkRequired('name', this.name());
-      const length = this.name().trim().length;
+      const length = this.charLength(this.name().trim());
       if (this.name().trim() !== '' && length < 2) {
         errors.name = this.trans('validation.name_too_short');
       } else if (length > 100) {
@@ -450,14 +460,14 @@ export default class ContactForm extends Component<ContactFormAttrs> {
 
     if (config.fields.subject.enabled) {
       checkRequired('subject', this.subject());
-      if (this.subject().length > config.subjectMaxLength) {
+      if (this.charLength(this.subject()) > config.subjectMaxLength) {
         errors.subject = this.trans('validation.subject_too_long', { max: config.subjectMaxLength });
       }
     }
 
     if (config.fields.message.enabled) {
       checkRequired('message', this.message());
-      const length = this.message().trim().length;
+      const length = this.charLength(this.message().trim());
       if (this.message().trim() !== '' && length < config.messageMinLength) {
         errors.message = this.trans('validation.message_too_short', { min: config.messageMinLength });
       } else if (length > config.messageMaxLength) {
@@ -511,5 +521,9 @@ export default class ContactForm extends Component<ContactFormAttrs> {
 
   private trans(key: string, params: Record<string, unknown> = {}): string {
     return app.translator.trans(`cengizkemec-contact-page.forum.${key}`, params, true) as string;
+  }
+
+  private charLength(value: string): number {
+    return Array.from(value).length;
   }
 }

@@ -7,6 +7,18 @@ and the project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-30
+
+### Fixed
+
+- Kept a valid Turnstile token when the server returns field validation errors,
+  and reset it after failures that may have consumed it.
+- Cleared stale form errors between submission attempts.
+- Used Unicode character counts in the client-side name, subject and message
+  length checks so they match the server.
+
+## [1.0.0] - 2026-10-30
+
 ### Added
 
 - Dedicated `/contact` page with native Flarum layout and responsive styling.
@@ -22,7 +34,3 @@ and the project follows [Semantic Versioning](https://semver.org/).
 - Server-side settings validation.
 - English and Turkish localization.
 - Unit and integration tests, PHPStan configuration and GitHub Actions workflows.
-
-## [1.0.0] - 2026-10-30
-
-Initial public release.
