@@ -25,6 +25,9 @@ Flarum'un mevcut posta altyapısını kullanır.
 - Giriş yapmış kullanıcılar için ad ve e-posta ön doldurma.
 - Satır bazında yönetilen iletişim kategorileri.
 - Yapılandırılabilir mesaj ve konu uzunluk sınırları.
+- Yönetim panelinden yönetilen, iletişim sayfasına özel isteğe bağlı CSS.
+- Zorunlu alan bilgisi ve gizlilik politikası bağlantısının onay kutusunun
+  altında gösterimi.
 - Flarum'un mevcut posta taşıyıcısı üzerinden gönderim; ayrı SMTP ayarı yok.
 - HTML ve düz metin e-posta sürümleri.
 - Güvenli gönderen adresi Flarum `mail_from` ayarından alınır; ziyaretçi

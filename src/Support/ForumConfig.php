@@ -36,6 +36,7 @@ final class ForumConfig
             'title' => $this->stringOrNull('page_title'),
             'description' => $this->stringOrNull('page_description'),
             'successMessage' => $this->stringOrNull('success_message'),
+            'customCss' => $this->stringOrNull('custom_css'),
             'accessMode' => $this->settings->string('access_mode'),
             'allowGuestSubmissions' => $this->settings->bool('allow_guest_submissions'),
             'allowRegisteredSubmissions' => $this->settings->bool('allow_registered_submissions'),

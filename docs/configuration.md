@@ -17,6 +17,25 @@ a convenience.
 | Success message | Empty | Shown after a successful submission. |
 | Contact categories | Empty | One category per line. The category field is hidden when the list is empty. |
 
+## Appearance
+
+| Setting | Default | Purpose |
+| --- | --- | --- |
+| Custom CSS | Empty | CSS injected into the document only while the contact page is open. Maximum 50,000 characters. |
+
+Custom CSS is intended for small visual adjustments that do not warrant a
+separate theme extension. Prefix selectors with `.ContactPage` so the rules only
+affect the contact page, for example:
+
+```css
+.ContactPage-card {
+  max-width: 860px;
+}
+```
+
+The field is managed by administrators and is never sanitized as HTML. Treat it
+like any other theme customisation and review changes before saving.
+
 ## Access permissions
 
 | Setting | Default | Purpose |
@@ -47,6 +66,10 @@ translated default.
 
 Supported fields: full name, email, subject, message, category, phone and privacy
 acceptance.
+
+When at least one visible field is required, the form shows a short note that
+fields marked with `*` are mandatory. The optional privacy policy link is
+rendered below the privacy acceptance label.
 
 Defaults:
 

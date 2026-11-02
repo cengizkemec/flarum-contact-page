@@ -319,6 +319,7 @@ final class ContactSettingsValidator
         return [
             'page_description' => 2000,
             'success_message' => 2000,
+            'custom_css' => 50000,
         ];
     }
 

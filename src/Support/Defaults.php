@@ -36,6 +36,7 @@ final class Defaults
             'page_title' => '',
             'page_description' => '',
             'success_message' => '',
+            'custom_css' => '',
             'categories' => '',
             'default_language' => 'auto',
 

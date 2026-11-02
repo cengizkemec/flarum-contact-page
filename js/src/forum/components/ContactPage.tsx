@@ -11,6 +11,7 @@ import { denialKey, getContactPageConfig, type ContactPageConfig } from '../../c
 export default class ContactPage extends Page {
   private config: ContactPageConfig = getContactPageConfig();
   private submitted = false;
+  private customCssElement: HTMLStyleElement | null = null;
 
   oninit(vnode: Mithril.Vnode<Record<string, unknown>, this>): void {
     super.oninit(vnode);
@@ -21,8 +22,17 @@ export default class ContactPage extends Page {
   oncreate(vnode: Mithril.VnodeDOM<Record<string, unknown>, this>): void {
     super.oncreate(vnode);
 
+    this.injectCustomCss();
+
     app.setTitle(this.pageTitle());
     app.setTitleCount(0);
+  }
+
+  onremove(vnode: Mithril.VnodeDOM<Record<string, unknown>, this>): void {
+    this.customCssElement?.remove();
+    this.customCssElement = null;
+
+    super.onremove(vnode);
   }
 
   view(): Mithril.Children {
@@ -87,5 +97,22 @@ export default class ContactPage extends Page {
 
   private pageDescription(): string | null {
     return this.config.description || (app.translator.trans('cengizkemec-contact-page.forum.page_description', {}, true) as string);
+  }
+
+  private injectCustomCss(): void {
+    const css = this.config.customCss?.trim();
+
+    if (!css) {
+      return;
+    }
+
+    document.getElementById('cengizkemec-contact-page-custom-css')?.remove();
+
+    const style = document.createElement('style');
+    style.id = 'cengizkemec-contact-page-custom-css';
+    style.textContent = css;
+    document.head.appendChild(style);
+
+    this.customCssElement = style;
   }
 }

@@ -63,6 +63,8 @@ export default class ContactForm extends Component<ContactFormAttrs> {
           </Alert>
         )}
 
+        {this.hasRequiredFields() && <p className="ContactPage-requiredNote helpText">{this.trans('required_note')}</p>}
+
         <div className="ContactPage-formRow">
           {config.fields.name.enabled && this.renderText('name', 'text', { autocomplete: 'name' })}
           {config.fields.email.enabled && this.renderText('email', 'email', { autocomplete: 'email' })}
@@ -309,16 +311,15 @@ export default class ContactForm extends Component<ContactFormAttrs> {
                 *
               </span>
             )}
-            {config.privacyUrl && (
-              <>
-                {' '}
-                <a href={config.privacyUrl} target="_blank" rel="noopener noreferrer">
-                  {this.trans('privacy_link')}
-                </a>
-              </>
-            )}
           </span>
         </label>
+        {config.privacyUrl && (
+          <p className="ContactPage-privacyLink">
+            <a href={config.privacyUrl} target="_blank" rel="noopener noreferrer">
+              {this.trans('privacy_link')}
+            </a>
+          </p>
+        )}
         {error && (
           <p id={`${id}-error`} className="ContactPage-fieldError" role="alert">
             {error}
@@ -496,6 +497,14 @@ export default class ContactForm extends Component<ContactFormAttrs> {
     }
 
     return errors;
+  }
+
+  private hasRequiredFields(): boolean {
+    const config = this.attrs.config;
+
+    return (Object.keys(config.fields) as FieldName[]).some(
+      (field) => config.fields[field].enabled && config.fields[field].required && (field !== 'category' || config.categories.length > 0)
+    );
   }
 
   private clearError(field: FieldName): void {

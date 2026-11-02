@@ -7,6 +7,21 @@ and the project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-02
+
+### Added
+
+- Added an Appearance settings section with a custom CSS field. The CSS is
+  injected only while the contact page is open and is limited to 50,000
+  characters.
+- Added a required-fields hint above the form when at least one visible field is
+  required.
+
+### Changed
+
+- Moved the privacy policy link below the privacy acceptance label so it no
+  longer interrupts the checkbox text.
+
 ## [1.0.2] - 2026-10-30
 
 ### Fixed

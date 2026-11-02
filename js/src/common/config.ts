@@ -19,6 +19,7 @@ export interface ContactPageConfig {
   title: string | null;
   description: string | null;
   successMessage: string | null;
+  customCss: string | null;
   accessMode: AccessMode;
   allowGuestSubmissions: boolean;
   allowRegisteredSubmissions: boolean;
@@ -60,6 +61,7 @@ export const EMPTY_CONFIG: ContactPageConfig = {
   title: null,
   description: null,
   successMessage: null,
+  customCss: null,
   accessMode: 'disabled',
   allowGuestSubmissions: false,
   allowRegisteredSubmissions: false,
@@ -101,6 +103,7 @@ export function getContactPageConfig(): ContactPageConfig {
   return {
     ...EMPTY_CONFIG,
     ...raw,
+    customCss: typeof raw.customCss === 'string' && raw.customCss.trim() !== '' ? raw.customCss : null,
     categories: Array.isArray(raw.categories) ? raw.categories.filter((category): category is string => typeof category === 'string') : [],
     fields: {
       ...EMPTY_CONFIG.fields,

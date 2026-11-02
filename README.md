@@ -23,6 +23,8 @@ Turkish documentation: [README.tr.md](README.tr.md)
 - Optional prefill of name and email for logged-in users.
 - Contact categories managed by line-separated labels.
 - Configurable minimum/maximum message length and subject length.
+- Optional custom CSS for the contact page, managed from the admin panel.
+- Required-field hint and a privacy policy link placed below the checkbox text.
 - Sends through Flarum's configured mailer. No separate SMTP settings.
 - HTML and plain-text email versions.
 - Safe sender address from Flarum's `mail_from`; visitor email is used as
@@ -80,8 +82,8 @@ The page is available at `/contact`.
 
 ## Configuration
 
-The extension settings are grouped into General, Access permissions, Form
-configuration, Message limits, Email, Security, Cloudflare Turnstile, Rate
+The extension settings are grouped into General, Appearance, Access permissions,
+Form configuration, Message limits, Email, Security, Cloudflare Turnstile, Rate
 limiting and Localization. A detailed reference is available in
 [docs/configuration.md](docs/configuration.md).
 

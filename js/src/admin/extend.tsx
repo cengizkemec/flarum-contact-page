@@ -40,6 +40,9 @@ setting('page_description', 'textarea');
 setting('success_message', 'textarea');
 setting('categories', 'textarea');
 
+section('appearance');
+setting('custom_css', 'textarea');
+
 section('access');
 setting('access_mode', 'select', () => ({
   options: {

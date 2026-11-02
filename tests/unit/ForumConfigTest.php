@@ -56,6 +56,17 @@ class ForumConfigTest extends TestCase
         $this->assertTrue($config['fields']['category']['required']);
     }
 
+    public function test_custom_css_is_available_to_the_forum_frontend(): void
+    {
+        $settings = new ContactSettings(SettingsMock::make([
+            'custom_css' => '.ContactPage-card { padding: 40px; }',
+        ]));
+
+        $config = (new ForumConfig($settings))(true);
+
+        $this->assertSame('.ContactPage-card { padding: 40px; }', $config['customCss']);
+    }
+
     public function test_disabled_access_mode_makes_the_page_unavailable(): void
     {
         $settings = new ContactSettings(SettingsMock::make([

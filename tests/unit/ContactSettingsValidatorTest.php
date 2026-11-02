@@ -74,6 +74,24 @@ class ContactSettingsValidatorTest extends TestCase
         $this->assertSame("General\nSupport", $normalized['categories']);
     }
 
+    public function test_custom_css_is_trimmed_and_preserved(): void
+    {
+        $values = Defaults::all();
+        $values['custom_css'] = "\n  .ContactPage-card {\n    padding: 40px;\n  }  \n";
+
+        $normalized = $this->validator()->validate($values);
+
+        $this->assertSame(".ContactPage-card {\n    padding: 40px;\n  }", $normalized['custom_css']);
+    }
+
+    public function test_custom_css_length_is_limited(): void
+    {
+        $values = Defaults::all();
+        $values['custom_css'] = str_repeat('a', 50001);
+
+        $this->assertValidationError($values, 'custom_css');
+    }
+
     public function test_secret_keys_may_not_contain_whitespace(): void
     {
         $values = Defaults::all();

@@ -173,6 +173,11 @@ final class ContactSettings
         return max(0, $this->int('time_trap_seconds'));
     }
 
+    public function customCss(): string
+    {
+        return $this->string('custom_css');
+    }
+
     public function privacyUrl(): string
     {
         $url = $this->string('privacy_url');

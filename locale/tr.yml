@@ -4,6 +4,7 @@ cengizkemec-contact-page:
     page_title: İletişim
     page_description: "Bize mesaj gönderin, en kısa sürede size dönüş yapalım."
     success_message: "Mesajınız başarıyla gönderildi. Teşekkür ederiz!"
+    required_note: "Yıldız (*) ile işaretlenen alanlar zorunludur."
     submit_button: Mesaj gönder
     sending: Gönderiliyor...
     send_another: Yeni mesaj gönder
@@ -70,6 +71,7 @@ cengizkemec-contact-page:
   admin:
     sections:
       general: Genel
+      appearance: Görünüm
       access: Erişim izinleri
       form: Form yapılandırması
       fields: Form alanları
@@ -93,6 +95,8 @@ cengizkemec-contact-page:
       page_description_help: "Sayfa başlığının altında gösterilir. Yalnızca düz metin."
       success_message_label: Başarı mesajı
       success_message_help: "Mesaj başarıyla gönderildikten sonra gösterilir. Çevrilmiş varsayılan için boş bırakın."
+      custom_css_label: Özel CSS
+      custom_css_help: "Yalnızca iletişim sayfası açıkken uygulanan isteğe bağlı CSS. Diğer sayfaları etkilememek için seçicileri .ContactPage ile başlatın. En fazla 50.000 karakter."
       categories_label: İletişim kategorileri
       categories_help: "Her satıra bir kategori yazın. Liste boşsa kategori alanı gizlenir."
       default_language_label: Varsayılan dil
